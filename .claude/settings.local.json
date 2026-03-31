@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git remote:*)",
+      "Bash(ls /Users/cbarriga/Projects/sapphire-salon/*.md)",
+      "Bash(ls /Users/cbarriga/Projects/sapphire-salon/README*)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

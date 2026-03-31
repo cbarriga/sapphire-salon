@@ -3,38 +3,71 @@
 Converted from WordPress / WPMUDEV to Astro + Vercel.
 Cost: $0/month (Vercel free tier). Only cost is domain renewal (~$15/yr).
 
-## Setup
+## First-time setup
 
 ```bash
-# 1. Download images from the live WP site (run once)
+# 1. Download images from the live WP site (run once after cloning)
 bash scripts/download-images.sh
 
-# 2. Install and run locally
+# 2. Install dependencies
 npm install
-npm run dev        # → http://localhost:4321
 
-# 3. Build
-npm run build
+# 3. Run locally
+npm run dev        # → http://localhost:4321
 ```
 
-## Deploy
+## Connect to Vercel (one-time)
 
-Push to GitHub, then connect to Vercel:
-1. vercel.com → New Project → Import GitHub repo
-2. Leave all defaults → Deploy
-3. In Vercel dashboard → Settings → Domains → add sapphiresalonnh.com
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Click **Import Git Repository** → select `cbarriga/sapphire-salon`
+3. Leave all defaults (Astro is auto-detected) → click **Deploy**
+4. After deploy: Settings → Domains → add `sapphiresalonnh.com`
+
+Auto-deploy is enabled automatically — every push to `main` triggers a new deploy.
+
+To link your local environment to the Vercel project (enables `vercel dev` and preview deploys):
+
+```bash
+vercel link   # follow prompts to select your project
+```
+
+## Deploy workflow
+
+Every push to `main` auto-deploys to production. The normal workflow is:
+
+```bash
+# Make your changes to src/pages/index.astro, then:
+git add -A
+git commit -m "describe what you changed"
+git push
+```
+
+Vercel will build and deploy automatically. Check status at vercel.com/dashboard.
+
+**Preview before pushing** (optional):
+
+```bash
+npm run build    # build locally, check for errors
+npm run preview  # → http://localhost:4321 (production build)
+```
+
+**Manual deploy** (bypasses GitHub, useful for quick fixes):
+
+```bash
+vercel --prod
+```
 
 ## Update content
 
 Everything is in one file: `src/pages/index.astro`
 
-| Section   | Find in file                   |
-|-----------|-------------------------------|
-| About text | `<!-- ABOUT -->` section      |
-| Prices     | `<!-- SERVICES -->` section   |
-| Team bios  | `const team = [...]` at top   |
-| Contact    | `<!-- CONTACT -->` section    |
-| Colors/fonts | `<style is:global>` block   |
+| Section        | Where to look                  |
+|----------------|-------------------------------|
+| About text     | `<!-- ABOUT -->` section      |
+| Prices         | `<!-- SERVICES -->` section   |
+| Team bios      | `const team = [...]` at top   |
+| Contact info   | `<!-- CONTACT -->` section    |
+| Colors / fonts | `<style is:global>` block     |
 
 ## Why one file?
 
