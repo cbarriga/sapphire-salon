@@ -27,9 +27,11 @@ const team = [
 ];
 
 const heroSlides = [
-  { src: "/images/salon-1.jpg", alt: "Sapphire Salon interior — styling stations" },
-  { src: "/images/salon-2.jpg", alt: "Sapphire Salon interior — main floor" },
-  { src: "/images/salon-3.jpg", alt: "Sapphire Salon interior — waiting area" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9514.jpg", alt: "Sapphire Salon — hair styling" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9525.jpg", alt: "Sapphire Salon — hair coloring" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9528.jpg", alt: "Sapphire Salon — hair care" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9543.jpg", alt: "Sapphire Salon — styling" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9547.jpg", alt: "Sapphire Salon — services" },
 ];
 ---
 
@@ -40,6 +42,7 @@ const heroSlides = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Sapphire Salon provides a friendly, caring, professional atmosphere for men, women, and children of all ages in Hudson, NH." />
   <title>Home page | Sapphire Salon NH</title>
+  <link rel="icon" type="image/png" href="/images/cropped-logo_500.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -88,8 +91,11 @@ const heroSlides = [
 </section>
 
 <div class="two-col-photos">
-  <img src="/images/salon-2.jpg" alt="Hair styling" loading="lazy" />
-  <img src="/images/salon-3.jpg" alt="Hair coloring" loading="lazy" />
+  <img src="/images/salon-1.jpg" alt="Hair styling" loading="lazy" />
+  <div class="two-col-photos-right">
+    <img src="/images/salon-2.jpg" alt="Hair coloring" loading="lazy" />
+    <img src="/images/salon-3.jpg" alt="Salon services" loading="lazy" />
+  </div>
 </div>
 
 <!-- ===================== SERVICES ===================== -->
@@ -247,13 +253,19 @@ const heroSlides = [
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400;700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background: #fff;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   color: #333;
   background: #fff;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.12);
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -261,13 +273,17 @@ img { max-width: 100%; height: auto; display: block; }
 /* --- NAV --- */
 #site-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1280px;
   z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  height: 55px;
+  height: 80px;
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.07);
@@ -283,7 +299,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 #navLinks a {
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -311,7 +327,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* --- HERO --- */
 .hero {
-  margin-top: 55px;
+  margin-top: 80px;
   position: relative;
   overflow: hidden;
   background: #111;
@@ -384,9 +400,18 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.two-col-photos img {
+.two-col-photos > img {
   width: 100%;
-  height: 400px;
+  height: 600px;
+  object-fit: cover;
+}
+.two-col-photos-right {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.two-col-photos-right img {
+  width: 100%;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -618,7 +643,7 @@ footer a:hover { color: #aaa; }
   #navLinks {
     display: none;
     position: absolute;
-    top: 55px; left: 0; right: 0;
+    top: 80px; left: 0; right: 0;
     flex-direction: column;
     gap: 0;
     background: #fff;
@@ -630,13 +655,15 @@ footer a:hover { color: #aaa; }
     display: block;
     padding: 14px 20px;
     border-bottom: 1px solid #f0f0f0;
-    font-size: 15px;
+    font-size: 18px;
   }
   .mobile-toggle { display: flex; }
 
   .hero-slide img { height: 260px; }
   .two-col-photos { grid-template-columns: 1fr; }
-  .two-col-photos img { height: 260px; }
+  .two-col-photos > img { height: 260px; }
+  .two-col-photos-right { grid-template-rows: unset; grid-template-columns: 1fr 1fr; }
+  .two-col-photos-right img { height: 180px; }
   .about { padding: 36px 20px; }
   .services { padding: 40px 16px 60px; }
   .tab-btn { font-size: 12px; padding: 9px 12px; }
