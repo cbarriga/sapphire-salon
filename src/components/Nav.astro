@@ -1,0 +1,38 @@
+---
+---
+<nav class="site-nav" id="site-nav">
+  <a href="#" class="logo" aria-label="Sapphire Salon NH Home">
+    <img src="/images/header.png" alt="Sapphire Salon NH" width="225" height="30" />
+  </a>
+
+  <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul id="nav-links">
+    <li><a href="#salon">The Salon</a></li>
+    <li><a href="#services">Our Services</a></li>
+    <li><a href="#ourteam">Meet Our Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<script>
+  const toggle = document.getElementById('mobile-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = navLinks?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close menu when a link is clicked
+  navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

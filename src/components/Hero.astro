@@ -1,0 +1,66 @@
+---
+const slides = [
+  { src: "/images/salon-1.jpg", alt: "Sapphire Salon interior — styling stations" },
+  { src: "/images/salon-2.jpg", alt: "Sapphire Salon interior — main floor" },
+  { src: "/images/salon-3.jpg", alt: "Sapphire Salon interior — waiting area" },
+];
+---
+
+<section class="hero" id="salon" aria-label="Salon photo carousel">
+  <div class="hero-slides" id="heroSlides">
+    {slides.map((slide) => (
+      <div class="hero-slide">
+        <img src={slide.src} alt={slide.alt} loading="eager" />
+      </div>
+    ))}
+  </div>
+
+  <button class="hero-prev" id="heroPrev" aria-label="Previous slide">&#8249;</button>
+  <button class="hero-next" id="heroNext" aria-label="Next slide">&#8250;</button>
+
+  <div class="hero-dots" role="tablist" aria-label="Slide navigation">
+    {slides.map((_, i) => (
+      <button
+        class={`hero-dot ${i === 0 ? 'active' : ''}`}
+        data-index={i}
+        aria-label={`Go to slide ${i + 1}`}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+      />
+    ))}
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('heroSlides') as HTMLElement;
+  const dots = document.querySelectorAll<HTMLButtonElement>('.hero-dot');
+  const total = dots.length;
+  let current = 0;
+  let autoTimer: ReturnType<typeof setInterval>;
+
+  function goTo(index: number) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+    });
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  document.getElementById('heroNext')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); resetAuto(); });
+  });
+
+  startAuto();
+</script>
