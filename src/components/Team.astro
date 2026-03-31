@@ -3,34 +3,34 @@ const team = [
   {
     name: "Mia",
     img: "/images/team-mia.jpg",
-    bio: "Mia strives to build deep and personal relationships with all her clients. With over 14 years in customer service, she knows how to make every treatment a unique and individualized experience. A deep believer in wellness, Mia loves to help everyone form confidence through their skincare routine and a healthy lifestyle."
+    bio: "Mia strives to build deep and personal relationships with all her clients. With over 14 years in customer service, she knows how to make every treatment a unique and individualized experience for each person. A deep believer in wellness, Mia loves to help everyone form confidence in themselves through their skincare routine and a healthy lifestyle."
   },
   {
     name: "Katy",
     img: "/images/team-katy.jpg",
-    bio: "Katy started her career as a hairstylist in 2008. Her sweetness and styling prowess have given Katy a legion of adoring clients who always look forward to their next visit. She exudes an endless passion for hair design utilizing her artistic and technical education to create the perfect look for each and every client. Katy's positive energetic personality will make you smile!"
+    bio: "Katy started her career as a hairstylist in 2008. Her sweetness and styling prowess have given Katy a legion of adoring clients who always look forward to their next visit to her chair. She exudes an endless passion for hair design utilizing her artistic and technical education to create the perfect look for each and every client. Katy's positive energetic personality will make you smile!"
   },
   {
     name: "Elisha",
     img: "/images/team-elisha.jpg",
-    bio: "Elisha started her career at Sapphire Salon in April 2007. She never shies away from incredible color, bold cuts, or runway-ready updos. You can count on Elisha to produce brilliant results that are easy to recreate at home, especially with her valuable suggestions on the right tools and products for your hair type. Her emphasis on healthy hair revival has garnered her a loyal following with every age group."
+    bio: "Elisha started her career at Sapphire Salon April of 2007. Elisha is always up for a challenge and never shies away from incredible color, bold cuts, or runway-ready updos. She helps her clients express themselves with styles that are tailored to each individual's unique desires and lifestyle. You can count on Elisha to produce brilliant results that are easy to recreate at home, especially with her valuable suggestions on the right tools and products for your hair type and style. Her emphasis on healthy hair revival has garnered her a loyal following with every age group. Over the years, we've loved watching her grow into a dynamic, rock star stylist!"
   },
   {
     name: "Dori",
     img: "/images/team-dori.jpg",
-    bio: "Dori has owned Sapphire Salon since 2000. With more than 20 years of experience, she has accumulated many certifications, won awards, and has had her work published. She takes pride in providing a relaxed, laid-back atmosphere while promoting current trends and professional service. Her passion for great customer service shines through every day!"
+    bio: "Dori has owned Sapphire Salon since 2000. With more than 20 years of experience, she has accumulated many certifications, won awards and has had her work published. She takes pride in providing a relaxed, laid-back atmosphere while promoting current trends and professional service. Her passion for great customer service shines through everyday!"
   }
 ];
 ---
 
-<section class="team-section" id="ourteam">
+<section class="team" id="ourteam">
   <h2>Meet Our Expert Team</h2>
   <div class="team-grid">
-    {team.map(member => (
-      <div class="team-member">
-        <img src={member.img} alt={member.name} loading="lazy" />
-        <h3>{member.name}</h3>
-        <p>{member.bio}</p>
+    {team.map(m => (
+      <div class="team-card">
+        <img src={m.img} alt={m.name} loading="lazy" />
+        <h3>{m.name}</h3>
+        <p>{m.bio}</p>
       </div>
     ))}
   </div>

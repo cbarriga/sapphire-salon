@@ -1,66 +1,45 @@
 ---
-const slides = [
-  { src: "/images/salon-1.jpg", alt: "Sapphire Salon interior — styling stations" },
-  { src: "/images/salon-2.jpg", alt: "Sapphire Salon interior — main floor" },
-  { src: "/images/salon-3.jpg", alt: "Sapphire Salon interior — waiting area" },
+const heroSlides = [
+  { src: "/images/CB_20141006-Sapphire-Salon_9514.jpg", alt: "Sapphire Salon — hair styling" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9525.jpg", alt: "Sapphire Salon — hair coloring" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9528.jpg", alt: "Sapphire Salon — hair care" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9543.jpg", alt: "Sapphire Salon — styling" },
+  { src: "/images/CB_20141006-Sapphire-Salon_9547.jpg", alt: "Sapphire Salon — services" },
 ];
 ---
 
-<section class="hero" id="salon" aria-label="Salon photo carousel">
-  <div class="hero-slides" id="heroSlides">
-    {slides.map((slide) => (
+<section class="hero" id="salon" aria-label="Salon photos">
+  <div class="hero-track" id="heroTrack">
+    {heroSlides.map(slide => (
       <div class="hero-slide">
-        <img src={slide.src} alt={slide.alt} loading="eager" />
+        <img src={slide.src} alt={slide.alt} />
       </div>
     ))}
   </div>
-
-  <button class="hero-prev" id="heroPrev" aria-label="Previous slide">&#8249;</button>
-  <button class="hero-next" id="heroNext" aria-label="Next slide">&#8250;</button>
-
-  <div class="hero-dots" role="tablist" aria-label="Slide navigation">
-    {slides.map((_, i) => (
-      <button
-        class={`hero-dot ${i === 0 ? 'active' : ''}`}
-        data-index={i}
-        aria-label={`Go to slide ${i + 1}`}
-        role="tab"
-        aria-selected={i === 0 ? 'true' : 'false'}
-      />
+  <button class="hero-arrow hero-prev" id="heroPrev" aria-label="Previous">&#8249;</button>
+  <button class="hero-arrow hero-next" id="heroNext" aria-label="Next">&#8250;</button>
+  <div class="hero-dots">
+    {heroSlides.map((_, i) => (
+      <button class:list={["hero-dot", { active: i === 0 }]} data-index={i} aria-label={`Slide ${i + 1}`} />
     ))}
   </div>
 </section>
 
 <script>
-  const track = document.getElementById('heroSlides') as HTMLElement;
-  const dots = document.querySelectorAll<HTMLButtonElement>('.hero-dot');
-  const total = dots.length;
-  let current = 0;
-  let autoTimer: ReturnType<typeof setInterval>;
+const track = document.getElementById('heroTrack') as HTMLElement;
+const dots = document.querySelectorAll<HTMLElement>('.hero-dot');
+let cur = 0;
+let timer: ReturnType<typeof setInterval>;
 
-  function goTo(index: number) {
-    current = (index + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
-    });
-  }
+function goTo(n: number) {
+  cur = ((n % dots.length) + dots.length) % dots.length;
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+}
+function restart() { clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 5000); }
 
-  function startAuto() {
-    autoTimer = setInterval(() => goTo(current + 1), 5000);
-  }
-
-  function resetAuto() {
-    clearInterval(autoTimer);
-    startAuto();
-  }
-
-  document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-  document.getElementById('heroNext')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); resetAuto(); });
-  });
-
-  startAuto();
+document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(cur - 1); restart(); });
+document.getElementById('heroNext')?.addEventListener('click', () => { goTo(cur + 1); restart(); });
+dots.forEach(d => d.addEventListener('click', () => { goTo(Number(d.dataset.index)); restart(); }));
+restart();
 </script>

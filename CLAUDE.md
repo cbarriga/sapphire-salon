@@ -7,8 +7,8 @@ Zero monthly hosting cost (Vercel free tier). Domain: sapphiresalonnh.com.
 
 ## Stack
 - **Framework:** Astro 4 (static output, no SSR)
-- **Styling:** Plain CSS inside `<style is:global>` in `index.astro` — no Tailwind, no CSS modules
-- **JavaScript:** Vanilla JS inside `<script>` in `index.astro` — no frameworks
+- **Styling:** Plain CSS inside `<style is:global>` in `src/layouts/Layout.astro` — no Tailwind, no CSS modules
+- **JavaScript:** Vanilla JS inside `<script>` in each component — no frameworks
 - **Hosting:** Vercel (auto-deploy on push to `main`)
 - **Fonts:** Google Fonts — Yanone Kaffeesatz (headings/nav)
 - **Images:** Static files in `public/images/` — downloaded from live WP site via `scripts/download-images.sh`
@@ -16,26 +16,31 @@ Zero monthly hosting cost (Vercel free tier). Domain: sapphiresalonnh.com.
 ## File structure
 ```
 sapphire-salon/
-├── public/images/          # All 8 site images (header, salon-1/2/3, team x4)
+├── public/images/          # All site images (header, salon-1/2/3, team x4, hero slides)
 ├── scripts/
 │   └── download-images.sh  # curl script to pull images from live WP site
-├── src/pages/
-│   └── index.astro         # THE ONLY SOURCE FILE — all HTML, CSS, JS here
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro    # HTML shell + all global CSS (<style is:global>)
+│   ├── components/
+│   │   ├── Nav.astro       # Fixed nav + mobile hamburger script
+│   │   ├── Hero.astro      # 5-slide carousel + script
+│   │   ├── About.astro     # About paragraph + two-col photo grid
+│   │   ├── Services.astro  # Tabbed pricing tables + script
+│   │   ├── Team.astro      # 4-up team grid
+│   │   └── Contact.astro   # Google Maps + contact details + footer
+│   └── pages/
+│       └── index.astro     # Imports Layout + all components
 ├── astro.config.mjs
 ├── package.json
 └── CLAUDE.md
 ```
 
-## Critical architecture decision
-**Everything lives in `src/pages/index.astro` — one file.**
-
-This is intentional. Earlier attempts split CSS into `src/styles/global.css` with a
-`<link href="/styles/global.css">` reference, which caused a 404 because Astro does
-not serve files from `src/` as static assets. Using `<style is:global>` inside
-`index.astro` guarantees Astro bundles and injects the CSS correctly.
-
-Do NOT refactor into separate component files unless there is a strong reason —
-the site is small enough that one file is the right tradeoff.
+## CSS architecture note
+All CSS lives in `<style is:global>` inside `Layout.astro`. Do NOT use a separate
+`src/styles/global.css` file with a `<link>` tag — Astro does not serve files from
+`src/` as static assets, which causes a 404. The `is:global` tag inside any Astro
+component guarantees Astro bundles and injects the CSS correctly.
 
 ## Commands
 ```bash

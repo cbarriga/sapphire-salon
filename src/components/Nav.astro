@@ -1,17 +1,15 @@
 ---
 ---
-<nav class="site-nav" id="site-nav">
-  <a href="#" class="logo" aria-label="Sapphire Salon NH Home">
-    <img src="/images/header.png" alt="Sapphire Salon NH" width="225" height="30" />
+<nav id="site-nav">
+  <a href="#" class="nav-logo" aria-label="Sapphire Salon NH">
+    <img src="/images/header.png" alt="Sapphire Salon" height="30" />
   </a>
 
-  <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
   </button>
 
-  <ul id="nav-links">
+  <ul id="navLinks">
     <li><a href="#salon">The Salon</a></li>
     <li><a href="#services">Our Services</a></li>
     <li><a href="#ourteam">Meet Our Team</a></li>
@@ -20,19 +18,13 @@
 </nav>
 
 <script>
-  const toggle = document.getElementById('mobile-toggle');
-  const navLinks = document.getElementById('nav-links');
-
-  toggle?.addEventListener('click', () => {
-    const isOpen = navLinks?.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-
-  // Close menu when a link is clicked
-  navLinks?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      toggle?.setAttribute('aria-expanded', 'false');
-    });
-  });
+const toggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+toggle?.addEventListener('click', () => {
+  const open = navLinks?.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+navLinks?.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => { navLinks.classList.remove('open'); })
+);
 </script>
