@@ -92,6 +92,80 @@ npm run preview  # serve dist/ at http://localhost:4321
 
 ---
 
+## Testing
+
+Automated tests guard against breaking changes. Tests cover:
+
+- Build verification (ensure project builds successfully)
+- Component existence and structure
+- Image assets validation
+- HTML structure and metadata
+- Internal links and anchors
+
+### Run tests locally
+
+**Watch mode (auto-run on file changes):**
+
+```bash
+npm run test          # runs in watch mode
+```
+
+**Single run (for pre-push verification):**
+
+```bash
+npm run test:run      # run tests once
+```
+
+**Interactive test dashboard:**
+
+```bash
+npm run test:ui       # open visual test UI
+```
+
+### Local workflow
+
+Keep tests running in a separate terminal while developing:
+
+```bash
+# Terminal 1: Run tests in watch mode
+npm run test
+
+# Terminal 2 (or tab): Run dev server
+npm run dev
+```
+
+### Pre-push checklist
+
+**Always run this before pushing:**
+
+```bash
+npm run test:run && npm run build && git push
+```
+
+### Continuous Integration (GitHub Actions)
+
+Tests run automatically on every push via GitHub Actions:
+
+- ✅ Tests pass → Auto-deploy to Vercel
+- ❌ Tests fail → **Deployment blocked** (see Actions tab)
+
+To check test status:
+
+1. Push your changes: `git push`
+2. Go to **Actions** tab on GitHub
+3. View test results (takes ~30 seconds)
+
+**If tests fail:**
+
+1. Check the error in Actions → test run
+2. Fix the issue locally
+3. Run `npm run test:run` to verify
+4. Push again
+
+Test files are in the `tests/` directory. Add new tests when adding features or fixing bugs.
+
+---
+
 ## Where to edit content
 
 | Section        | File                                                           | What to look for          |
