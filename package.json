@@ -8,6 +8,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.0.0"
+    "astro": "^6.2.1"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

@@ -8,13 +8,20 @@ Cost: $0/month (Vercel free tier). Only cost is domain renewal (~$15/yr).
 
 ## Developer setup (new machine)
 
-### 1. Prerequisites
+### 1. Clone the repo
 
-| Tool | Version | Install |
-|------|---------|---------|
-| Node.js | 22.x | [nodejs.org](https://nodejs.org) or via nvm (see below) |
-| npm | 10.x (bundled with Node 22) | — |
-| Git | any recent | [git-scm.com](https://git-scm.com) |
+```bash
+git clone https://github.com/cbarriga/sapphire-salon.git
+cd sapphire-salon
+```
+
+### 2. Prerequisites
+
+| Tool    | Version                     | Install                                                 |
+| ------- | --------------------------- | ------------------------------------------------------- |
+| Node.js | 22.x                        | [nodejs.org](https://nodejs.org) or via nvm (see below) |
+| npm     | 10.x (bundled with Node 22) | —                                                       |
+| Git     | any recent                  | [git-scm.com](https://git-scm.com)                      |
 
 **Recommended: use nvm to manage Node versions**
 
@@ -27,25 +34,10 @@ nvm install   # reads .nvmrc → installs Node 22
 nvm use       # switches to Node 22
 ```
 
-### 2. Clone the repo
-
-```bash
-git clone https://github.com/cbarriga/sapphire-salon.git
-cd sapphire-salon
-```
-
 ### 3. Install dependencies
 
 ```bash
 npm install
-```
-
-### 4. Download images
-
-Images are not committed to the repo. Pull them from the live WordPress site once after cloning:
-
-```bash
-bash scripts/download-images.sh
 ```
 
 This downloads all images into `public/images/`. You only need to run this once (or again if the source images change).
@@ -69,12 +61,12 @@ Open the project folder in VSCode and install the recommended extensions when pr
 2. Run **"Extensions: Show Recommended Extensions"**
 3. Install all extensions under **Workspace Recommendations**
 
-| Extension | Purpose |
-|-----------|---------|
-| Astro (`astro-build.astro-vscode`) | Syntax highlighting and IntelliSense for `.astro` files |
-| Prettier (`esbenp.prettier-vscode`) | Code formatting |
-| Auto Rename Tag (`formulahendry.auto-rename-tag`) | Keeps HTML open/close tags in sync |
-| HTML CSS Support (`ecmel.vscode-html-css`) | CSS class name autocomplete in HTML |
+| Extension                                         | Purpose                                                 |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| Astro (`astro-build.astro-vscode`)                | Syntax highlighting and IntelliSense for `.astro` files |
+| Prettier (`esbenp.prettier-vscode`)               | Code formatting                                         |
+| Auto Rename Tag (`formulahendry.auto-rename-tag`) | Keeps HTML open/close tags in sync                      |
+| HTML CSS Support (`ecmel.vscode-html-css`)        | CSS class name autocomplete in HTML                     |
 
 Project settings (`.vscode/settings.json`) automatically enable format-on-save and consistent line endings.
 
@@ -102,15 +94,15 @@ npm run preview  # serve dist/ at http://localhost:4321
 
 ## Where to edit content
 
-| Section | File | What to look for |
-|---------|------|-----------------|
-| About text | [src/components/About.astro](src/components/About.astro) | paragraph text |
-| Prices | [src/components/Services.astro](src/components/Services.astro) | table rows |
-| Team bios | [src/components/Team.astro](src/components/Team.astro) | `team` array |
-| Contact info | [src/components/Contact.astro](src/components/Contact.astro) | address / phone / hours |
-| Colors / fonts | [src/layouts/Layout.astro](src/layouts/Layout.astro) | `<style is:global>` block |
-| Hero slides | [src/components/Hero.astro](src/components/Hero.astro) | `heroSlides` array |
-| Navigation | [src/components/Nav.astro](src/components/Nav.astro) | nav links |
+| Section        | File                                                           | What to look for          |
+| -------------- | -------------------------------------------------------------- | ------------------------- |
+| About text     | [src/components/About.astro](src/components/About.astro)       | paragraph text            |
+| Prices         | [src/components/Services.astro](src/components/Services.astro) | table rows                |
+| Team bios      | [src/components/Team.astro](src/components/Team.astro)         | `team` array              |
+| Contact info   | [src/components/Contact.astro](src/components/Contact.astro)   | address / phone / hours   |
+| Colors / fonts | [src/layouts/Layout.astro](src/layouts/Layout.astro)           | `<style is:global>` block |
+| Hero slides    | [src/components/Hero.astro](src/components/Hero.astro)         | `heroSlides` array        |
+| Navigation     | [src/components/Nav.astro](src/components/Nav.astro)           | nav links                 |
 
 ---
 
