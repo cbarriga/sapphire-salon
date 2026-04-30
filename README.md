@@ -149,6 +149,8 @@ Tests run automatically on every push via GitHub Actions:
 - ✅ Tests pass → Auto-deploy to Vercel
 - ❌ Tests fail → **Deployment blocked** (see Actions tab)
 
+A monthly Dependabot check is also configured to monitor GitHub Actions workflow versions and open update PRs automatically.
+
 To check test status:
 
 1. Push your changes: `git push`
