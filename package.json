@@ -11,12 +11,10 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "astro": "^6.2.1"
   },
   "devDependencies": {
-    "vitest": "^1.6.1"
-  },
-  "overrides": {
-    "vite": "^7"
+    "vitest": "^4.1.9"
   }
 }
